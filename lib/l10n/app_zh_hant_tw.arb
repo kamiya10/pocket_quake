@@ -1,0 +1,15 @@
+{
+  "@@locale": "zh_Hant_TW",
+  "buttonCancel": "取消",
+  "viewDashboard": "主頁",
+  "viewReports": "地震報告",
+  "viewSettings": "設定",
+  "settingsThemeTitle": "主題",
+  "settingsLocationTitle": "所在地",
+  "settingsLocationCityTitle": "縣市",
+  "settingsLocationTownTitle": "鄉鎮",
+  "locationNone": "尚未設定",
+  "themeOptionLight": "淺色",
+  "themeOptionDark": "深色",
+  "themeOptionSystem": "跟隨系統主題"
+}

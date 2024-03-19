@@ -1,0 +1,51 @@
+{
+  "@@locale": "en",
+  "buttonCancel": "Cancel",
+  "@buttonCancel": {
+    "description": "Cancel button label."
+  },
+  "viewDashboard": "Dashboard",
+  "@viewDashboard": {
+    "description": "The name of the Dashboard view."
+  },
+  "viewReports": "Earthquakes",
+  "@viewReports": {
+    "description": "The name of the Earthquake Reports view."
+  },
+  "viewSettings": "Settings",
+  "@viewSettings": {
+    "description": "The name of the Settings view."
+  },
+  "settingsThemeTitle": "Theme",
+  "@settingsThemeTitle": {
+    "description": "The title of theme mode setting in settings view."
+  },
+  "settingsLocationTitle": "Location",
+  "@settingsLocationTitle": {
+    "description": "The title of location setting in settings view."
+  },
+  "settingsLocationCityTitle": "City",
+  "@settingsLocationCityTitle": {
+    "description": "The title of city setting in location settings view."
+  },
+  "settingsLocationTownTitle": "Town",
+  "@settingsLocationTownTitle": {
+    "description": "The title of town setting in location settings view."
+  },
+  "themeOptionLight": "Light",
+  "@themeOptionLight": {
+    "description": "Light Theme Option"
+  },
+  "themeOptionDark": "Dark",
+  "@themeOptionDark": {
+    "description": "Dark Theme Option"
+  },
+  "themeOptionSystem": "Sync with System",
+  "@themeOptionSystem": {
+    "description": "System Theme Option"
+  },
+  "locationNone": "Location hasn't been set yet",
+  "@locationNone": {
+    "description": "The subtitle of location setting ListTile when location hasn't been set"
+  }
+}

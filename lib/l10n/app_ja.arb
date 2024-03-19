@@ -1,0 +1,15 @@
+{
+  "@@locale": "ja",
+  "buttonCancel": "キャンセル",
+  "viewDashboard": "ホーム",
+  "viewReports": "地震情報",
+  "viewSettings": "設定",
+  "settingsThemeTitle": "テーマ",
+  "settingsLocationTitle": "現在地",
+  "settingsLocationCityTitle": "市",
+  "settingsLocationTownTitle": "郡区",
+  "locationNone": "現在地はまだ設定されていません",
+  "themeOptionLight": "ライト",
+  "themeOptionDark": "ダーク",
+  "themeOptionSystem": "システムのデフォルト"
+}
