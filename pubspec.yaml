@@ -16,6 +16,7 @@ dependencies:
   http: ^1.2.1
   intl: any
   json_annotation: ^4.8.1
+  maplibre_gl: ^0.16.0
   material_symbols_icons: ^4.2719.3
   shared_preferences: ^2.2.2
 
@@ -30,5 +31,6 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
+    - assets/image/cross.png
     - assets/json/region.json
     - assets/json/location.json
