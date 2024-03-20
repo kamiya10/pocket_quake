@@ -11,5 +11,9 @@
   "locationNone": "現在地はまだ設定されていません",
   "themeOptionLight": "ライト",
   "themeOptionDark": "ダーク",
-  "themeOptionSystem": "システムのデフォルト"
+  "themeOptionSystem": "システムのデフォルト",
+  "reportNumbered": "第 {reportNumber} 号",
+  "reportUnnumbered": "局地的な地震",
+  "reportMagnitude": "マグニチュード {reportMagnitude}",
+  "reportDepth": "深さ {reportDepth} km"
 }

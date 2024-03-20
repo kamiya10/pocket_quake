@@ -47,5 +47,36 @@
   "locationNone": "Location hasn't been set yet",
   "@locationNone": {
     "description": "The subtitle of location setting ListTile when location hasn't been set"
+  },
+  "reportNumbered": "No. {reportNumber}",
+  "@reportNumbered": {
+    "description": "The type name of an numbered earthquake report",
+    "placeholders": {
+      "reportNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "reportUnnumbered": "Local Earthquake",
+  "@reportUnnumbered": {
+    "description": "The type name of an unnumbered earthquake report"
+  },
+  "reportMagnitude": "Magnitude {reportMagnitude}",
+  "@reportMagnitude": {
+    "description": "Magnitude of an earthquake report",
+    "placeholders": {
+      "reportMagnitude": {
+        "type": "String"
+      }
+    }
+  },
+  "reportDepth": "Depth {reportDepth} km",
+  "@reportDepth": {
+    "description": "Depth of an earthquake report",
+    "placeholders": {
+      "reportDepth": {
+        "type": "String"
+      }
+    }
   }
 }

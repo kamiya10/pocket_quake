@@ -14,14 +14,30 @@ class Layout extends StatefulWidget {
 
 class LayoutState extends State<Layout> {
   int currentPageIndex = 0;
-
+  late PageController _pageController;
   List<Widget> bodyWidgets = [const Home(), const Reports(), const Settings()];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pageController = PageController(initialPage: currentPageIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: (int index) {
             setState(() {
               currentPageIndex = index;
+              _pageController.jumpToPage(currentPageIndex);
             });
           },
           selectedIndex: currentPageIndex,
@@ -43,6 +59,10 @@ class LayoutState extends State<Layout> {
             )
           ],
         ),
-        body: bodyWidgets[currentPageIndex],
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: bodyWidgets,
+        ),
       );
 }

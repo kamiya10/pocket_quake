@@ -11,5 +11,9 @@
   "locationNone": "尚未設定",
   "themeOptionLight": "淺色",
   "themeOptionDark": "深色",
-  "themeOptionSystem": "跟隨系統主題"
+  "themeOptionSystem": "跟隨系統主題",
+  "reportNumbered": "編號 {reportNumber}",
+  "reportUnnumbered": "小地區有感地震",
+  "reportMagnitude": "芮氏規模 {reportMagnitude}",
+  "reportDepth": "深度 {reportDepth} km"
 }

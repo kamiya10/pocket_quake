@@ -1,16 +1,20 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:pocket_quake/core/api.dart';
 import 'package:pocket_quake/model/location.dart';
 import 'package:pocket_quake/model/town.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Global {
   static late SharedPreferences preference;
+  static late ExpTechApi api;
   static Map<String, Map<String, Town>> region = {};
   static Map<String, Location> location = {};
   static Future init() async {
     preference = await SharedPreferences.getInstance();
+
+    api = ExpTechApi(apikey: preference.getString("apikey"));
 
     // src: assets/json/region.json
     Map<String, dynamic> regionRaw =
