@@ -50,7 +50,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
         all.sort((a, b) => a.intensity - b.intensity);
 
         final theme = Theme.of(context);
-        final points = <LatLng>[];
+        final points = <LatLng>[LatLng(r.lat, r.lon)];
 
         for (var town in all) {
           points.add(LatLng(town.lat, town.lon));
