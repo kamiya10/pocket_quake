@@ -288,12 +288,25 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                       const SizedBox(height: 12),
                                       DetailField(
                                           label: l10n.reportEpicenterCoordinate,
-                                          value: Text(
-                                              "${toCoordinateNotation(widget.partialReport.lat)} ${toCoordinateNotation(widget.partialReport.lon)}",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: theme.colorScheme
-                                                      .onSurfaceVariant))),
+                                          value: Wrap(
+                                            spacing: 16,
+                                            children: [
+                                              Text(
+                                                  toCoordinateNotation(
+                                                      widget.partialReport.lat),
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: theme.colorScheme
+                                                          .onSurfaceVariant)),
+                                              Text(
+                                                  toCoordinateNotation(
+                                                      widget.partialReport.lon),
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: theme.colorScheme
+                                                          .onSurfaceVariant))
+                                            ],
+                                          )),
                                       const SizedBox(height: 12),
                                       DetailField(
                                           label: l10n.reportEpicenterLocation,

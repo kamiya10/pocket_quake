@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_quake/model/station_intensity.dart';
 import 'package:pocket_quake/utils/intensity_color.dart';
@@ -16,7 +17,11 @@ class IntensityBadge extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14.0),
             border: Border.all(
-                color: theme.colorScheme.intensity(station.intensity))),
+                color: theme.colorScheme.intensity(station.intensity)),
+            color: theme.colorScheme
+                .intensity(station.intensity)
+                .harmonizeWith(theme.colorScheme.primary)
+                .withOpacity(0.16)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
