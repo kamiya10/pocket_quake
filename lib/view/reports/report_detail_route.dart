@@ -124,7 +124,9 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                 options: MapOptions(
                   backgroundColor: Colors.transparent,
                   interactionOptions: const InteractionOptions(
-                      flags: InteractiveFlag.pinchZoom | InteractiveFlag.drag),
+                      flags: InteractiveFlag.drag |
+                          InteractiveFlag.pinchZoom |
+                          InteractiveFlag.pinchMove),
                   initialCenter: LatLng(
                       widget.partialReport.lat -
                           (widget.partialReport.mag / 10),
