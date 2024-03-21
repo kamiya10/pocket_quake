@@ -14,6 +14,12 @@
   "themeOptionSystem": "システムのデフォルト",
   "reportNumbered": "第 {reportNumber} 号",
   "reportUnnumbered": "局地的な地震",
-  "reportMagnitude": "マグニチュード {reportMagnitude}",
-  "reportDepth": "深さ {reportDepth} km"
+  "reportCardMagnitude": "マグニチュード {reportMagnitude}",
+  "reportCardDepth": "深さ {reportDepth} km",
+  "reportEventTime": "発生時刻",
+  "reportMagnitude": "マグニチュード",
+  "reportDepth": "深さ",
+  "reportEpicenterCoordinate": "震源座標",
+  "reportEpicenterLocation": "震源地",
+  "reportIntensity": "各地の最大震度"
 }

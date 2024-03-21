@@ -61,22 +61,46 @@
   "@reportUnnumbered": {
     "description": "The type name of an unnumbered earthquake report"
   },
-  "reportMagnitude": "Magnitude {reportMagnitude}",
-  "@reportMagnitude": {
-    "description": "Magnitude of an earthquake report",
+  "reportCardMagnitude": "Magnitude {reportMagnitude}",
+  "@reportCardMagnitude": {
+    "description": "Magnitude of an earthquake report card",
     "placeholders": {
       "reportMagnitude": {
         "type": "String"
       }
     }
   },
-  "reportDepth": "Depth {reportDepth} km",
-  "@reportDepth": {
-    "description": "Depth of an earthquake report",
+  "reportCardDepth": "Depth {reportDepth} km",
+  "@reportCardDepth": {
+    "description": "Depth of an earthquake report card",
     "placeholders": {
       "reportDepth": {
         "type": "String"
       }
     }
+  },
+  "reportEventTime": "Event Time",
+  "@reportEventTime": {
+    "description": "Event Time of an earthquake report"
+  },
+  "reportMagnitude": "Magnitude",
+  "@reportMagnitude": {
+    "description": "Magnitude of an earthquake report"
+  },
+  "reportDepth": "Depth",
+  "@reportDepth": {
+    "description": "Depth of an earthquake report"
+  },
+  "reportEpicenterCoordinate": "Epicenter Coordinate",
+  "@reportEpicenterCoordinate": {
+    "description": "Epicenter Coordinate of an earthquake report"
+  },
+  "reportEpicenterLocation": "Epicenter Location",
+  "@reportEpicenterLocation": {
+    "description": "Epicenter Location of an earthquake report"
+  },
+  "reportIntensity": "Maximum Intensity",
+  "@reportIntensity": {
+    "description": "Maximum Intensity of an earthquake report"
   }
 }

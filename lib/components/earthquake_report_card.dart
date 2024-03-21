@@ -62,14 +62,15 @@ class EarthquakeReportCard extends StatelessWidget {
                         ),
                         Row(children: [
                           Text(
-                            l10n.reportMagnitude(report.mag.toStringAsFixed(1)),
+                            l10n.reportCardMagnitude(
+                                report.mag.toStringAsFixed(1)),
                             style: TextStyle(
                                 fontSize: 14,
                                 color: theme.colorScheme.onSurfaceVariant),
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            l10n.reportDepth(report.depth.toString()),
+                            l10n.reportCardDepth(report.depth.toString()),
                             style: TextStyle(
                                 fontSize: 14,
                                 color: theme.colorScheme.onSurfaceVariant),

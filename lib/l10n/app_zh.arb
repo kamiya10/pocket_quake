@@ -14,6 +14,12 @@
   "themeOptionSystem": "跟隨系統主題",
   "reportNumbered": "編號 {reportNumber}",
   "reportUnnumbered": "小地區有感地震",
-  "reportMagnitude": "芮氏規模 {reportMagnitude}",
-  "reportDepth": "深度 {reportDepth} km"
+  "reportCardMagnitude": "芮氏規模 {reportMagnitude}",
+  "reportCardDepth": "深度 {reportDepth} km",
+  "reportEventTime": "發生時間",
+  "reportMagnitude": "芮氏規模",
+  "reportDepth": "深度",
+  "reportEpicenterCoordinate": "震央座標",
+  "reportEpicenterLocation": "震央位置",
+  "reportIntensity": "各地最大震度"
 }

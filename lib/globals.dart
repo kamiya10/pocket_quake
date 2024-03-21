@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Global {
   static late SharedPreferences preference;
   static late ExpTechApi api;
+  static late String taiwanGeojsonString;
   static Map<String, Map<String, Town>> region = {};
   static Map<String, Location> location = {};
   static Future init() async {
@@ -36,5 +37,8 @@ class Global {
     locationRaw.forEach((postal, data) {
       location[postal] = Location.fromJson(data);
     });
+
+    taiwanGeojsonString =
+        await rootBundle.loadString("assets/json/tw_city.geojson");
   }
 }

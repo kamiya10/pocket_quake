@@ -13,12 +13,15 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  flutter_map: ^6.1.0
+  flutter_map_geojson: ^1.0.6
   http: ^1.2.1
   intl: any
   json_annotation: ^4.8.1
-  maplibre_gl: ^0.16.0
+  latlong2: ^0.9.0
   material_symbols_icons: ^4.2719.3
   shared_preferences: ^2.2.2
+  simplify: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +37,4 @@ flutter:
     - assets/image/cross.png
     - assets/json/region.json
     - assets/json/location.json
+    - assets/json/tw_city.geojson
