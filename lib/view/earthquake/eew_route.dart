@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:pocket_quake/globals.dart';
 
 class EewRoute extends StatefulWidget {
@@ -44,23 +46,33 @@ class _EewRoute extends State<EewRoute> {
               ),
             ]),
         bottomSheet: Card(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-          ),
-          elevation: 4,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+            elevation: 4,
+            margin: EdgeInsets.zero,
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text("強震即時警報",
-                      style: TextStyle(
-                          fontSize: 24, color: theme.colorScheme.error)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Symbols.warning_rounded,
+                        size: 28,
+                        color: theme.colorScheme.error,
+                        weight: 700,
+                      ),
+                      Text("強震即時警報",
+                          style: TextStyle(
+                              fontSize: 24, color: theme.colorScheme.error)),
+                    ],
+                  )
                 ],
-              )
-            ],
-          ),
-        ));
+              ),
+            )));
   }
 }
