@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pocket_quake/globals.dart';
 import 'package:pocket_quake/main.dart';
+import 'package:pocket_quake/view/earthquake/eew_route.dart';
 import 'package:pocket_quake/view/settings/location_setting_route.dart';
 
 class Settings extends StatefulWidget {
@@ -104,6 +105,15 @@ class _SettingsState extends State<Settings> {
                 setState(() {
                   _location = Global.preference.getString("location") ?? "";
                 });
+              },
+            ),
+            ListTile(
+              title: const Text("開啟速報畫面"),
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EewRoute()),
+                );
               },
             ),
           ],

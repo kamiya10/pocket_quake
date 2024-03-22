@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:pocket_quake/model/partial_earthquake_report.dart';
 import 'package:pocket_quake/utils/intensity_color.dart';
-import 'package:pocket_quake/view/reports/report_detail_route.dart';
+import 'package:pocket_quake/view/earthquake/report_detail_route.dart';
 
 class EarthquakeReportCard extends StatelessWidget {
   final PartialEarthquakeReport report;
@@ -54,7 +54,7 @@ class EarthquakeReportCard extends StatelessWidget {
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          DateFormat("yyyy/MM/dd hh:mm:ss").format(
+                          DateFormat("yyyy/MM/dd HH:mm:ss").format(
                               DateTime.fromMillisecondsSinceEpoch(report.time)),
                           style: TextStyle(
                               fontSize: 14,

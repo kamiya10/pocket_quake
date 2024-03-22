@@ -74,7 +74,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
 
         _mapController.fitCamera(CameraFit.bounds(
             bounds: LatLngBounds.fromPoints(points),
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 240)));
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 240)));
       });
     });
   }
@@ -140,6 +140,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                   PolygonLayer(
                     polygons: geojson.polygons,
                     polygonCulling: true,
+                    polygonLabels: false,
                   ),
                   MarkerLayer(markers: _stations),
                   MarkerLayer(markers: [
@@ -255,7 +256,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                       DetailField(
                                           label: l10n.reportEventTime,
                                           value: Text(
-                                              DateFormat("yyyy/MM/dd hh:mm:ss")
+                                              DateFormat("yyyy/MM/dd HH:mm:ss")
                                                   .format(DateTime
                                                       .fromMillisecondsSinceEpoch(
                                                           widget.partialReport
