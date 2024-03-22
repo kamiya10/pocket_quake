@@ -48,7 +48,7 @@ class MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) => DynamicColorBuilder(
-      builder: (lightColorScheme, darkColorScheme) => MaterialApp(
+        builder: (lightColorScheme, darkColorScheme) => MaterialApp(
           theme: ThemeData(
             colorScheme: lightColorScheme,
             brightness: Brightness.light,
@@ -60,5 +60,7 @@ class MainAppState extends State<MainApp> {
           themeMode: _themeMode,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: const Layout()));
+          home: const Layout(),
+        ),
+      );
 }

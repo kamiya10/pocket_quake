@@ -84,14 +84,17 @@ class _SettingsState extends State<Settings> {
           ListTile(
             leading: const Icon(Symbols.location_pin_rounded),
             title: Text(context.l10n.settingsLocationTitle),
-            subtitle: Text(_location.isNotEmpty
-                ? "${Global.location[_location]?.city} ${Global.location[_location]?.town}"
-                : "未設定"),
+            subtitle: Text(
+              _location.isNotEmpty
+                  ? "${Global.location[_location]?.city} ${Global.location[_location]?.town}"
+                  : "未設定",
+            ),
             onTap: () async {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const LocationSettingRoute()),
+                  builder: (context) => const LocationSettingRoute(),
+                ),
               );
 
               setState(() {
@@ -130,8 +133,9 @@ class _SettingsState extends State<Settings> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(context.l10n.buttonCancel))
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(context.l10n.buttonCancel),
+                        )
                       ],
                     ),
                   ),
