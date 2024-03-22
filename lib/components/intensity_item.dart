@@ -35,7 +35,7 @@ class IntensityBadge extends StatelessWidget {
                 child: Center(
                     child: Text(station.intensity.toString(),
                         style: TextStyle(
-                            fontSize: 16.0,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: theme.colorScheme
                                 .onIntensity(station.intensity))))),
@@ -44,7 +44,7 @@ class IntensityBadge extends StatelessWidget {
                 child: Text(name,
                     style: TextStyle(
                         color: theme.colorScheme.onSurfaceVariant,
-                        fontSize: 16.0))),
+                        fontSize: 14))),
           ],
         ));
   }

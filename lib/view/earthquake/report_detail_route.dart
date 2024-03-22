@@ -6,6 +6,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:intl/intl.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:pocket_quake/components/detail_field.dart';
 import 'package:pocket_quake/components/intensity_item.dart';
 import 'package:pocket_quake/globals.dart';
@@ -255,6 +256,10 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                       const SizedBox(height: 16),
                                       DetailField(
                                           label: l10n.reportEventTime,
+                                          icon: Icon(Symbols.schedule_rounded,
+                                              size: 32,
+                                              color: theme.colorScheme
+                                                  .onSurfaceVariant),
                                           value: Text(
                                               DateFormat("yyyy/MM/dd HH:mm:ss")
                                                   .format(DateTime
@@ -262,7 +267,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                                           widget.partialReport
                                                               .time)),
                                               style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 15,
                                                   color: theme.colorScheme
                                                       .onSurfaceVariant))),
                                       const SizedBox(height: 12),
@@ -271,26 +276,41 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                             flex: 1,
                                             child: DetailField(
                                                 label: l10n.reportMagnitude,
+                                                icon: Icon(
+                                                    Symbols.speed_rounded,
+                                                    size: 32,
+                                                    color: theme.colorScheme
+                                                        .onSurfaceVariant),
                                                 value: Text(
                                                     "M ${widget.partialReport.mag.toStringAsFixed(1)}",
                                                     style: TextStyle(
-                                                        fontSize: 16,
+                                                        fontSize: 15,
                                                         color: theme.colorScheme
                                                             .onSurfaceVariant)))),
                                         Expanded(
                                             flex: 1,
                                             child: DetailField(
                                                 label: l10n.reportDepth,
+                                                icon: Icon(
+                                                    Symbols
+                                                        .keyboard_double_arrow_down_rounded,
+                                                    size: 32,
+                                                    color: theme.colorScheme
+                                                        .onSurfaceVariant),
                                                 value: Text(
                                                     "${widget.partialReport.depth} km",
                                                     style: TextStyle(
-                                                        fontSize: 16,
+                                                        fontSize: 15,
                                                         color: theme.colorScheme
                                                             .onSurfaceVariant))))
                                       ]),
                                       const SizedBox(height: 12),
                                       DetailField(
                                           label: l10n.reportEpicenterCoordinate,
+                                          icon: Icon(Symbols.point_scan_rounded,
+                                              size: 32,
+                                              color: theme.colorScheme
+                                                  .onSurfaceVariant),
                                           value: Wrap(
                                             spacing: 16,
                                             children: [
@@ -298,14 +318,14 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                                   toCoordinateNotation(
                                                       widget.partialReport.lat),
                                                   style: TextStyle(
-                                                      fontSize: 16,
+                                                      fontSize: 15,
                                                       color: theme.colorScheme
                                                           .onSurfaceVariant)),
                                               Text(
                                                   toCoordinateNotation(
                                                       widget.partialReport.lon),
                                                   style: TextStyle(
-                                                      fontSize: 16,
+                                                      fontSize: 15,
                                                       color: theme.colorScheme
                                                           .onSurfaceVariant))
                                             ],
@@ -313,10 +333,15 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                       const SizedBox(height: 12),
                                       DetailField(
                                           label: l10n.reportEpicenterLocation,
+                                          icon: Icon(Symbols.pin_drop_rounded,
+                                              size: 32,
+                                              color: theme.colorScheme
+                                                  .onSurfaceVariant),
                                           value: Text(
-                                            widget.partialReport.loc,
+                                            widget.partialReport.loc
+                                                .replaceFirst("公里", "公里\n"),
                                             style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: 15,
                                                 color: theme.colorScheme
                                                     .onSurfaceVariant),
                                           )),
@@ -336,9 +361,6 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                                 c.add(IntensityBadge(
                                                     name: townName,
                                                     station: town));
-
-                                                c.add(
-                                                    const SizedBox(height: 4));
                                               });
 
                                               list.add(Column(
@@ -353,8 +375,8 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                                   ),
                                                   const SizedBox(height: 8),
                                                   Wrap(
-                                                      spacing: 4,
-                                                      runSpacing: 4,
+                                                      spacing: 6,
+                                                      runSpacing: 6,
                                                       children: c)
                                                 ],
                                               ));

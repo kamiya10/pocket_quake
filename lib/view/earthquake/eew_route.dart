@@ -46,33 +46,47 @@ class _EewRoute extends State<EewRoute> {
               ),
             ]),
         bottomSheet: Card(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-            ),
-            elevation: 4,
-            margin: EdgeInsets.zero,
-            child: Padding(
-              padding: const EdgeInsets.all(32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Symbols.warning_rounded,
-                        size: 28,
-                        color: theme.colorScheme.error,
-                        weight: 700,
-                      ),
-                      Text("強震即時警報",
-                          style: TextStyle(
-                              fontSize: 24, color: theme.colorScheme.error)),
-                    ],
-                  )
-                ],
-              ),
-            )));
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          elevation: 4,
+          margin: EdgeInsets.zero,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Card(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(16)),
+                  ),
+                  color: theme.colorScheme.error,
+                  margin: EdgeInsets.zero,
+                  child: Padding(
+                      padding: const EdgeInsets.all(32),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Symbols.warning_rounded,
+                            size: 32,
+                            color: theme.colorScheme.onError,
+                            fill: 1,
+                            weight: 700,
+                          ),
+                          const SizedBox(height: 4),
+                          Text("強震即時警報",
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  color: theme.colorScheme.onError)),
+                        ],
+                      ))),
+              const SizedBox(height: 8),
+              Row(
+                children: [Text("e")],
+              )
+            ],
+          ),
+        ));
   }
 }
