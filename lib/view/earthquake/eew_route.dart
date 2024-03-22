@@ -22,7 +22,12 @@ class _EewRoute extends State<EewRoute> {
     final geojson = GeoJsonParser(
         defaultPolygonFillColor: theme.colorScheme.surfaceVariant,
         defaultPolygonBorderColor: theme.colorScheme.outline);
-    geojson.parseGeoJsonAsString(Global.taiwanGeojsonString);
+
+    final baseMap = Global.preference.getString("base_map") ?? "geojson";
+
+    if (baseMap == "geojson") {
+      geojson.parseGeoJsonAsString(Global.taiwanGeojsonString);
+    }
 
     return Scaffold(
         body: FlutterMap(
@@ -39,11 +44,25 @@ class _EewRoute extends State<EewRoute> {
               initialZoom: 7,
             ),
             children: [
-              PolygonLayer(
-                polygons: geojson.polygons,
-                polygonCulling: true,
-                polygonLabels: false,
-              ),
+              baseMap == "geojson"
+                  ? PolygonLayer(
+                      polygons: geojson.polygons,
+                      polygonCulling: true,
+                      polygonLabels: false,
+                    )
+                  : TileLayer(
+                      urlTemplate: {
+                        "googlemap":
+                            "http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+                        "googletrain":
+                            "http://mt1.google.com/vt/lyrs=r@221097413,bike,transit&x={x}&y={y}&z={z}",
+                        "googlesatellite":
+                            "http://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+                        "openstreetmap":
+                            "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      }[baseMap],
+                      userAgentPackageName: 'app.kamiya.pocket_quake',
+                    ),
             ]),
         bottomSheet: Card(
           shape: const RoundedRectangleBorder(

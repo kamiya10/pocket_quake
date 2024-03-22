@@ -113,11 +113,12 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
     final geojson = GeoJsonParser(
         defaultPolygonFillColor: theme.colorScheme.surfaceVariant,
         defaultPolygonBorderColor: theme.colorScheme.outline);
-    geojson.parseGeoJsonAsString(Global.taiwanGeojsonString);
 
     final baseMap = Global.preference.getString("base_map") ?? "geojson";
 
-    print(baseMap);
+    if (baseMap == "geojson") {
+      geojson.parseGeoJsonAsString(Global.taiwanGeojsonString);
+    }
 
     return Scaffold(
         appBar:
