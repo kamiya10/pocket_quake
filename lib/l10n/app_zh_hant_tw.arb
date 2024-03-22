@@ -27,5 +27,6 @@
   "reportDepth": "深度",
   "reportEpicenterCoordinate": "震央座標",
   "reportEpicenterLocation": "震央位置",
-  "reportIntensity": "各地最大震度"
+  "reportIntensity": "各地最大震度",
+  "about": "Pocket Quake 一個會在地震發生時敲你的實驗程式\n\n所有地震資料皆來自 ExpTech 探索科技，實際請以中央氣象署的資料為主"
 }

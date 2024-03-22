@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:pocket_quake/globals.dart';
 import 'package:pocket_quake/main.dart';
 import 'package:pocket_quake/utils/extensions.dart';
@@ -40,6 +41,7 @@ class _SettingsState extends State<Settings> {
         body: ListView(
           children: [
             ListTile(
+              leading: const Icon(Symbols.dark_mode_rounded),
               title: Text(context.l10n.settingsThemeTitle),
               subtitle: Text(themeOptions[_theme]!),
               onTap: () => showDialog<String>(
@@ -75,6 +77,7 @@ class _SettingsState extends State<Settings> {
               ),
             ),
             ListTile(
+              leading: const Icon(Symbols.location_pin_rounded),
               title: Text(context.l10n.settingsLocationTitle),
               subtitle: Text(_location.isNotEmpty
                   ? "${Global.location[_location]?.city} ${Global.location[_location]?.town}"
@@ -92,6 +95,7 @@ class _SettingsState extends State<Settings> {
               },
             ),
             ListTile(
+              leading: const Icon(Symbols.map_rounded),
               title: Text(context.l10n.settingsBaseMapTitle),
               subtitle: Text(baseMapOptions[_mapBase]!),
               onTap: () => showDialog<String>(
@@ -126,6 +130,7 @@ class _SettingsState extends State<Settings> {
               ),
             ),
             ListTile(
+              leading: const Icon(Symbols.bug_report_rounded),
               title: const Text("開啟速報畫面"),
               onTap: () async {
                 await Navigator.push(
@@ -134,6 +139,12 @@ class _SettingsState extends State<Settings> {
                 );
               },
             ),
+            AboutListTile(
+              icon: const Icon(Symbols.info_rounded),
+              applicationName: "Pocket Quake",
+              applicationVersion: "0.1.0",
+              aboutBoxChildren: [Text(context.l10n.about)],
+            )
           ],
         ));
   }
