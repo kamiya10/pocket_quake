@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class DetailField extends StatelessWidget {
   final String label;
   final Widget value;
-  final Widget? icon;
-
+  final IconData? icon;
   const DetailField(
       {super.key, required this.label, required this.value, this.icon});
 
@@ -29,7 +28,15 @@ class DetailField extends StatelessWidget {
 
     if (icon != null) {
       return Row(
-        children: [icon!, const SizedBox(width: 12), detail],
+        children: [
+          Icon(
+            icon,
+            size: 32,
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: 12),
+          detail
+        ],
       );
     } else {
       return detail;

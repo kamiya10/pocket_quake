@@ -156,7 +156,7 @@ class _SettingsState extends State<Settings> {
           AboutListTile(
             icon: const Icon(Symbols.info_rounded),
             applicationName: "Pocket Quake",
-            applicationVersion: "0.1.0",
+            applicationVersion: "0.0.1",
             aboutBoxChildren: [Text(context.l10n.about)],
           ),
         ],

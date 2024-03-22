@@ -130,12 +130,14 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
               options: MapOptions(
                 backgroundColor: Colors.transparent,
                 interactionOptions: const InteractionOptions(
-                    flags: InteractiveFlag.drag |
-                        InteractiveFlag.pinchZoom |
-                        InteractiveFlag.pinchMove),
+                  flags: InteractiveFlag.drag |
+                      InteractiveFlag.pinchZoom |
+                      InteractiveFlag.pinchMove,
+                ),
                 initialCenter: LatLng(
-                    widget.partialReport.lat - (widget.partialReport.mag / 10),
-                    widget.partialReport.lon),
+                  widget.partialReport.lat - (widget.partialReport.mag / 10),
+                  widget.partialReport.lon,
+                ),
                 initialZoom: (12.5 - widget.partialReport.mag),
                 onPointerHover: (event, point) {
                   _collapseBottomSheet();
@@ -266,11 +268,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                           const SizedBox(height: 16),
                           DetailField(
                             label: l10n.reportEventTime,
-                            icon: Icon(
-                              Symbols.schedule_rounded,
-                              size: 32,
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
+                            icon: Symbols.schedule_rounded,
                             value: Text(
                               DateFormat("yyyy/MM/dd HH:mm:ss").format(
                                 DateTime.fromMillisecondsSinceEpoch(
@@ -289,11 +287,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                 flex: 1,
                                 child: DetailField(
                                   label: l10n.reportMagnitude,
-                                  icon: Icon(
-                                    Symbols.speed_rounded,
-                                    size: 32,
-                                    color: theme.colorScheme.onSurfaceVariant,
-                                  ),
+                                  icon: Symbols.speed_rounded,
                                   value: Text(
                                     "M ${widget.partialReport.mag.toStringAsFixed(1)}",
                                     style: TextStyle(
@@ -307,12 +301,8 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                 flex: 1,
                                 child: DetailField(
                                   label: l10n.reportDepth,
-                                  icon: Icon(
-                                      Symbols
-                                          .keyboard_double_arrow_down_rounded,
-                                      size: 32,
-                                      color:
-                                          theme.colorScheme.onSurfaceVariant),
+                                  icon: Symbols
+                                      .keyboard_double_arrow_down_rounded,
                                   value: Text(
                                     "${widget.partialReport.depth} km",
                                     style: TextStyle(
@@ -327,11 +317,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                           const SizedBox(height: 12),
                           DetailField(
                             label: l10n.reportEpicenterCoordinate,
-                            icon: Icon(
-                              Symbols.point_scan_rounded,
-                              size: 32,
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
+                            icon: Symbols.point_scan_rounded,
                             value: Wrap(
                               spacing: 16,
                               children: [
@@ -357,11 +343,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                           const SizedBox(height: 12),
                           DetailField(
                               label: l10n.reportEpicenterLocation,
-                              icon: Icon(
-                                Symbols.pin_drop_rounded,
-                                size: 32,
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
+                              icon: Symbols.pin_drop_rounded,
                               value: Text(
                                 widget.partialReport.loc
                                     .replaceFirst("公里", "公里\n"),

@@ -4,7 +4,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:pocket_quake/components/detail_field.dart';
 import 'package:pocket_quake/globals.dart';
+import 'package:pocket_quake/utils/extensions.dart';
 
 class EewRoute extends StatefulWidget {
   const EewRoute({super.key});
@@ -39,6 +41,7 @@ class _EewRoute extends State<EewRoute> {
                   InteractiveFlag.pinchZoom |
                   InteractiveFlag.pinchMove),
           initialCameraFit: CameraFit.bounds(
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 240),
             bounds: LatLngBounds(
               const LatLng(25.33, 119.14),
               const LatLng(21.88, 122.18),
@@ -89,7 +92,7 @@ class _EewRoute extends State<EewRoute> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Symbols.warning_rounded,
+                      Symbols.crisis_alert_rounded,
                       size: 32,
                       color: theme.colorScheme.onError,
                       fill: 1,
@@ -99,15 +102,46 @@ class _EewRoute extends State<EewRoute> {
                     Text(
                       "強震即時警報",
                       style: TextStyle(
-                          fontSize: 24, color: theme.colorScheme.onError),
+                          color: theme.colorScheme.onError,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold),
                     ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "花蓮縣秀林鄉發生地震\n慎防強烈搖晃",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: theme.colorScheme.onError,
+                        fontSize: 14,
+                      ),
+                    )
                   ],
                 ),
               ),
             ),
             const SizedBox(height: 8),
-            Row(
-              children: [Text("e")],
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: DetailField(
+                      label: context.l10n.reportMagnitude,
+                      icon: Symbols.speed_rounded,
+                      value: const Text("M 5"),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: DetailField(
+                      label: context.l10n.reportDepth,
+                      icon: Symbols.keyboard_double_arrow_down_rounded,
+                      value: const Text("20 km"),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
