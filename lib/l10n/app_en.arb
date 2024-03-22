@@ -24,6 +24,10 @@
   "@settingsLocationTitle": {
     "description": "The title of location setting in settings view."
   },
+  "settingsBaseMapTitle": "Base Map",
+  "@settingsBaseMapTitle": {
+    "description": "The title of base map setting in settings view."
+  },
   "settingsLocationCityTitle": "City",
   "@settingsLocationCityTitle": {
     "description": "The title of city setting in location settings view."
@@ -43,6 +47,26 @@
   "themeOptionSystem": "Sync with System",
   "@themeOptionSystem": {
     "description": "System Theme Option"
+  },
+  "mapBaseOptionGeojson": "GeoJson",
+  "@mapBaseOptionGeojson": {
+    "description": "Base Map Option"
+  },
+  "mapBaseOptionGoogleMap": "Google Map",
+  "@mapBaseOptionMap": {
+    "description": "Base Map Option"
+  },
+  "mapBaseOptionGoogleTrain": "Google Train Map",
+  "@mapBaseOptionTrain": {
+    "description": "Base Map Option"
+  },
+  "mapBaseOptionGoogleSatellite": "Google Satellite Map",
+  "@mapBaseOptionSatellite": {
+    "description": "Base Map Option"
+  },
+  "mapBaseOptionOpenStreetMap": "OpenStreetMap",
+  "@mapBaseOptionOpenStreetMap": {
+    "description": "Base Map Option"
   },
   "locationNone": "Location hasn't been set yet",
   "@locationNone": {

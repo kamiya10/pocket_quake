@@ -115,6 +115,10 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
         defaultPolygonBorderColor: theme.colorScheme.outline);
     geojson.parseGeoJsonAsString(Global.taiwanGeojsonString);
 
+    final baseMap = Global.preference.getString("base_map") ?? "geojson";
+
+    print(baseMap);
+
     return Scaffold(
         appBar:
             AppBar(leading: const BackButton(), title: Text(l10n.viewReports)),
@@ -138,11 +142,25 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                   },
                 ),
                 children: [
-                  PolygonLayer(
-                    polygons: geojson.polygons,
-                    polygonCulling: true,
-                    polygonLabels: false,
-                  ),
+                  baseMap == "geojson"
+                      ? PolygonLayer(
+                          polygons: geojson.polygons,
+                          polygonCulling: true,
+                          polygonLabels: false,
+                        )
+                      : TileLayer(
+                          urlTemplate: {
+                            "googlemap":
+                                "http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+                            "googletrain":
+                                "http://mt1.google.com/vt/lyrs=r@221097413,bike,transit&x={x}&y={y}&z={z}",
+                            "googlesatellite":
+                                "http://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+                            "openstreetmap":
+                                "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                          }[baseMap],
+                          userAgentPackageName: 'app.kamiya.pocket_quake',
+                        ),
                   MarkerLayer(markers: _stations),
                   MarkerLayer(markers: [
                     Marker(
