@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -36,9 +37,13 @@ class EarthquakeReportCard extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12))),
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   border: Border(
-                      left: BorderSide(color: Colors.lightGreen, width: 4)),
+                      left: BorderSide(
+                          color: report
+                              .getReportColor()
+                              .harmonizeWith(theme.colorScheme.primary),
+                          width: 4)),
                 ),
                 padding: const EdgeInsets.all(16.0),
                 alignment: Alignment.centerLeft,

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'partial_earthquake_report.g.dart';
@@ -49,5 +50,18 @@ class PartialEarthquakeReport {
     } else {
       return loc.substring(0, loc.indexOf("方") + 1);
     }
+  }
+
+  Color getReportColor() {
+    if (mag > 6.5 && intensity >= 7) {
+      return Colors.red;
+    }
+    if (mag > 6.0 && intensity >= 5) {
+      return Colors.orange;
+    }
+    if (mag > 5.5 && intensity >= 4) {
+      return Colors.yellow;
+    }
+    return Colors.green;
   }
 }

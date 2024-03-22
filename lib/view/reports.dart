@@ -40,7 +40,7 @@ class _ReportsState extends State<Reports>
         title: Text(AppLocalizations.of(context)!.viewReports),
       ),
       body: FutureBuilder(
-          future: Global.api.getReportList(),
+          future: Global.api.getReportList(limit: 25),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               _reports = snapshot.data!;

@@ -9,9 +9,9 @@ class ExpTechApi {
 
   ExpTechApi({this.apikey});
 
-  Future<List<PartialEarthquakeReport>> getReportList() async {
+  Future<List<PartialEarthquakeReport>> getReportList({int limit = 20}) async {
     final response = await http.get(
-        Uri.parse('https://lb-3.exptech.com.tw/api/v2/eq/report?limit=20'));
+        Uri.parse('https://lb-3.exptech.com.tw/api/v2/eq/report?limit=$limit'));
 
     if (response.statusCode == 200) {
       return (jsonDecode(response.body) as List<dynamic>)
