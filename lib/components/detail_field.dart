@@ -12,13 +12,20 @@ class DetailField extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final detail =
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(label,
-          style: TextStyle(fontSize: 14, color: theme.colorScheme.onSurface)),
-      const SizedBox(height: 4),
-      value
-    ]);
+    final detail = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: theme.colorScheme.onSurface,
+          ),
+        ),
+        const SizedBox(height: 4),
+        value
+      ],
+    );
 
     if (icon != null) {
       return Row(

@@ -30,82 +30,88 @@ class _EewRoute extends State<EewRoute> {
     }
 
     return Scaffold(
-        body: FlutterMap(
-            mapController: _mapController,
-            options: MapOptions(
-              backgroundColor: Colors.transparent,
-              interactionOptions: const InteractionOptions(
-                  flags: InteractiveFlag.drag |
-                      InteractiveFlag.pinchZoom |
-                      InteractiveFlag.pinchMove),
-              initialCameraFit: CameraFit.bounds(
-                  bounds: LatLngBounds(const LatLng(25.33, 118.14),
-                      const LatLng(21.88, 122.18))),
-              initialZoom: 7,
+      body: FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(
+          backgroundColor: Colors.transparent,
+          interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.drag |
+                  InteractiveFlag.pinchZoom |
+                  InteractiveFlag.pinchMove),
+          initialCameraFit: CameraFit.bounds(
+            bounds: LatLngBounds(
+              const LatLng(25.33, 119.14),
+              const LatLng(21.88, 122.18),
             ),
-            children: [
-              baseMap == "geojson"
-                  ? PolygonLayer(
-                      polygons: geojson.polygons,
-                      polygonCulling: true,
-                      polygonLabels: false,
-                    )
-                  : TileLayer(
-                      urlTemplate: {
-                        "googlemap":
-                            "http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-                        "googletrain":
-                            "http://mt1.google.com/vt/lyrs=r@221097413,bike,transit&x={x}&y={y}&z={z}",
-                        "googlesatellite":
-                            "http://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-                        "openstreetmap":
-                            "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      }[baseMap],
-                      userAgentPackageName: 'app.kamiya.pocket_quake',
+          ),
+        ),
+        children: [
+          baseMap == "geojson"
+              ? PolygonLayer(
+                  polygons: geojson.polygons,
+                  polygonCulling: true,
+                  polygonLabels: false,
+                )
+              : TileLayer(
+                  urlTemplate: {
+                    "googlemap":
+                        "http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+                    "googletrain":
+                        "http://mt1.google.com/vt/lyrs=r@221097413,bike,transit&x={x}&y={y}&z={z}",
+                    "googlesatellite":
+                        "http://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+                    "openstreetmap":
+                        "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  }[baseMap],
+                  userAgentPackageName: 'app.kamiya.pocket_quake',
+                ),
+        ],
+      ),
+      bottomSheet: Card(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        ),
+        elevation: 4,
+        margin: EdgeInsets.zero,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Card(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              color: theme.colorScheme.error,
+              margin: EdgeInsets.zero,
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Symbols.warning_rounded,
+                      size: 32,
+                      color: theme.colorScheme.onError,
+                      fill: 1,
+                      weight: 700,
                     ),
-            ]),
-        bottomSheet: Card(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-          ),
-          elevation: 4,
-          margin: EdgeInsets.zero,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Card(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(16)),
-                  ),
-                  color: theme.colorScheme.error,
-                  margin: EdgeInsets.zero,
-                  child: Padding(
-                      padding: const EdgeInsets.all(32),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Symbols.warning_rounded,
-                            size: 32,
-                            color: theme.colorScheme.onError,
-                            fill: 1,
-                            weight: 700,
-                          ),
-                          const SizedBox(height: 4),
-                          Text("強震即時警報",
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  color: theme.colorScheme.onError)),
-                        ],
-                      ))),
-              const SizedBox(height: 8),
-              Row(
-                children: [Text("e")],
-              )
-            ],
-          ),
-        ));
+                    const SizedBox(height: 4),
+                    Text(
+                      "強震即時警報",
+                      style: TextStyle(
+                          fontSize: 24, color: theme.colorScheme.onError),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [Text("e")],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

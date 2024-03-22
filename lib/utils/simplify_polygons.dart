@@ -9,7 +9,9 @@ List<Polygon> simplifyPolyons(List<Polygon> polygons, {double? tolerance}) {
   for (var element in polygons) {
     List<Point<double>> points =
         element.points.map((e) => Point(e.latitude, e.longitude)).toList();
-    list.add(Polygon(
+
+    list.add(
+      Polygon(
         borderColor: element.borderColor,
         borderStrokeWidth: element.borderStrokeWidth,
         color: element.color,
@@ -24,7 +26,9 @@ List<Polygon> simplifyPolyons(List<Polygon> polygons, {double? tolerance}) {
         strokeJoin: element.strokeJoin,
         points: simplify<Point<double>>(points, tolerance: tolerance)
             .map((e) => LatLng(e.x, e.y))
-            .toList()));
+            .toList(),
+      ),
+    );
   }
 
   return list;

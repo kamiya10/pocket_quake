@@ -40,25 +40,27 @@ class _ReportsState extends State<Reports>
         title: Text(AppLocalizations.of(context)!.viewReports),
       ),
       body: FutureBuilder(
-          future: Global.api.getReportList(limit: 25),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              _reports = snapshot.data!;
+        future: Global.api.getReportList(limit: 25),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            _reports = snapshot.data!;
 
-              return RefreshIndicator(
-                  onRefresh: _refreshReports,
-                  child: ListView(
-                      padding: const EdgeInsets.all(12.0),
-                      children: _reports
-                          .map((e) => EarthquakeReportCard(report: e))
-                          .toList()));
-            } else {
-              return Center(
-                  child: snapshot.hasError
-                      ? Text('${snapshot.error}')
-                      : const CircularProgressIndicator());
-            }
-          }),
+            return RefreshIndicator(
+                onRefresh: _refreshReports,
+                child: ListView(
+                    padding: const EdgeInsets.all(12.0),
+                    children: _reports
+                        .map((e) => EarthquakeReportCard(report: e))
+                        .toList()));
+          } else {
+            return Center(
+              child: snapshot.hasError
+                  ? Text('${snapshot.error}')
+                  : const CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }

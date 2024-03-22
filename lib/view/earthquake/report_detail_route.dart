@@ -121,304 +121,310 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
     }
 
     return Scaffold(
-        appBar:
-            AppBar(leading: const BackButton(), title: Text(l10n.viewReports)),
-        body: Stack(
-          children: [
-            FlutterMap(
-                mapController: _mapController,
-                options: MapOptions(
-                  backgroundColor: Colors.transparent,
-                  interactionOptions: const InteractionOptions(
-                      flags: InteractiveFlag.drag |
-                          InteractiveFlag.pinchZoom |
-                          InteractiveFlag.pinchMove),
-                  initialCenter: LatLng(
-                      widget.partialReport.lat -
-                          (widget.partialReport.mag / 10),
-                      widget.partialReport.lon),
-                  initialZoom: (12.5 - widget.partialReport.mag),
-                  onPointerHover: (event, point) {
-                    _collapseBottomSheet();
-                  },
-                ),
-                children: [
-                  baseMap == "geojson"
-                      ? PolygonLayer(
-                          polygons: geojson.polygons,
-                          polygonCulling: true,
-                          polygonLabels: false,
-                        )
-                      : TileLayer(
-                          urlTemplate: {
-                            "googlemap":
-                                "http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-                            "googletrain":
-                                "http://mt1.google.com/vt/lyrs=r@221097413,bike,transit&x={x}&y={y}&z={z}",
-                            "googlesatellite":
-                                "http://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-                            "openstreetmap":
-                                "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                          }[baseMap],
-                          userAgentPackageName: 'app.kamiya.pocket_quake',
-                        ),
-                  MarkerLayer(markers: _stations),
-                  MarkerLayer(markers: [
-                    Marker(
-                        height: 42,
-                        width: 42,
-                        point: LatLng(
-                            widget.partialReport.lat, widget.partialReport.lon),
-                        child: const Image(
-                            image: AssetImage("assets/image/cross.png")))
-                  ]),
+      appBar:
+          AppBar(leading: const BackButton(), title: Text(l10n.viewReports)),
+      body: Stack(
+        children: [
+          FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                backgroundColor: Colors.transparent,
+                interactionOptions: const InteractionOptions(
+                    flags: InteractiveFlag.drag |
+                        InteractiveFlag.pinchZoom |
+                        InteractiveFlag.pinchMove),
+                initialCenter: LatLng(
+                    widget.partialReport.lat - (widget.partialReport.mag / 10),
+                    widget.partialReport.lon),
+                initialZoom: (12.5 - widget.partialReport.mag),
+                onPointerHover: (event, point) {
+                  _collapseBottomSheet();
+                },
+              ),
+              children: [
+                baseMap == "geojson"
+                    ? PolygonLayer(
+                        polygons: geojson.polygons,
+                        polygonCulling: true,
+                        polygonLabels: false,
+                      )
+                    : TileLayer(
+                        urlTemplate: {
+                          "googlemap":
+                              "http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+                          "googletrain":
+                              "http://mt1.google.com/vt/lyrs=r@221097413,bike,transit&x={x}&y={y}&z={z}",
+                          "googlesatellite":
+                              "http://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+                          "openstreetmap":
+                              "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        }[baseMap],
+                        userAgentPackageName: 'app.kamiya.pocket_quake',
+                      ),
+                MarkerLayer(markers: _stations),
+                MarkerLayer(markers: [
+                  Marker(
+                    height: 42,
+                    width: 42,
+                    point: LatLng(
+                        widget.partialReport.lat, widget.partialReport.lon),
+                    child: const Image(
+                      image: AssetImage("assets/image/cross.png"),
+                    ),
+                  )
                 ]),
-            LayoutBuilder(
-                builder: (lu, constraints) => DraggableScrollableSheet(
-                      key: _sheet,
-                      initialChildSize: 230 / constraints.maxHeight,
-                      maxChildSize: 1,
-                      minChildSize: 100 / constraints.maxHeight,
-                      snap: true,
-                      snapSizes: [
-                        100 / constraints.maxHeight,
-                        230 / constraints.maxHeight
+              ]),
+          LayoutBuilder(
+            builder: (lu, constraints) => DraggableScrollableSheet(
+              key: _sheet,
+              initialChildSize: 230 / constraints.maxHeight,
+              maxChildSize: 1,
+              minChildSize: 100 / constraints.maxHeight,
+              snap: true,
+              snapSizes: [
+                100 / constraints.maxHeight,
+                230 / constraints.maxHeight
+              ],
+              controller: _controller,
+              builder: (context, scrollController) => Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: _borderRadius.begin!,
+                ),
+                margin: EdgeInsets.zero,
+                elevation: 4.0,
+                child: ListView(
+                  controller: scrollController,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          height: 4,
+                          width: 32,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: theme.colorScheme.onSurfaceVariant
+                                  .withOpacity(0.4)),
+                        ),
                       ],
-                      controller: _controller,
-                      builder: (context, scrollController) => Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: _borderRadius.begin!,
-                          ),
-                          margin: EdgeInsets.zero,
-                          elevation: 4.0,
-                          child:
-                              ListView(controller: scrollController, children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  height: 4,
-                                  width: 32,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: theme.colorScheme.onSurfaceVariant
-                                          .withOpacity(0.4)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.partialReport.getLocation(),
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: theme.colorScheme.onSurface),
+                                  ),
+                                  Text(
+                                    widget.partialReport.getNumber() != null
+                                        ? l10n.reportNumbered(
+                                            widget.partialReport.getNumber()!)
+                                        : l10n.reportUnnumbered,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color:
+                                            theme.colorScheme.onSurfaceVariant),
+                                  )
+                                ],
+                              ),
+                              Container(
+                                width: 64,
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  color: theme.colorScheme.intensity(
+                                      widget.partialReport.intensity),
                                 ),
+                                child: Center(
+                                  child: Text(
+                                    widget.partialReport.intensity.toString(),
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold,
+                                      color: theme.colorScheme.onIntensity(
+                                        widget.partialReport.intensity,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          DetailField(
+                            label: l10n.reportEventTime,
+                            icon: Icon(
+                              Symbols.schedule_rounded,
+                              size: 32,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                            value: Text(
+                              DateFormat("yyyy/MM/dd HH:mm:ss").format(
+                                DateTime.fromMillisecondsSinceEpoch(
+                                    widget.partialReport.time),
+                              ),
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: DetailField(
+                                  label: l10n.reportMagnitude,
+                                  icon: Icon(
+                                    Symbols.speed_rounded,
+                                    size: 32,
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                  ),
+                                  value: Text(
+                                    "M ${widget.partialReport.mag.toStringAsFixed(1)}",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: theme.colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: DetailField(
+                                  label: l10n.reportDepth,
+                                  icon: Icon(
+                                      Symbols
+                                          .keyboard_double_arrow_down_rounded,
+                                      size: 32,
+                                      color:
+                                          theme.colorScheme.onSurfaceVariant),
+                                  value: Text(
+                                    "${widget.partialReport.depth} km",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: theme.colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          DetailField(
+                            label: l10n.reportEpicenterCoordinate,
+                            icon: Icon(
+                              Symbols.point_scan_rounded,
+                              size: 32,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                            value: Wrap(
+                              spacing: 16,
+                              children: [
+                                Text(
+                                  toCoordinateNotation(
+                                      widget.partialReport.lat),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                  ),
+                                ),
+                                Text(
+                                  toCoordinateNotation(
+                                      widget.partialReport.lon),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                  ),
+                                )
                               ],
                             ),
-                            Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 24),
-                                child: Column(
-                                    mainAxisSize: MainAxisSize.min,
+                          ),
+                          const SizedBox(height: 12),
+                          DetailField(
+                              label: l10n.reportEpicenterLocation,
+                              icon: Icon(
+                                Symbols.pin_drop_rounded,
+                                size: 32,
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                              value: Text(
+                                widget.partialReport.loc
+                                    .replaceFirst("公里", "公里\n"),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: theme.colorScheme.onSurfaceVariant),
+                              )),
+                          const SizedBox(height: 12),
+                          FutureBuilder(
+                            future: _report.future,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                List<Widget> list = [];
+
+                                snapshot.data!.list.forEach((cityName, city) {
+                                  List<Widget> c = [];
+
+                                  city.town.forEach((townName, town) {
+                                    c.add(IntensityBadge(
+                                        name: townName, station: town));
+                                  });
+
+                                  list.add(Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
                                     children: [
-                                      Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  widget.partialReport
-                                                      .getLocation(),
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: theme.colorScheme
-                                                          .onSurface),
-                                                ),
-                                                Text(
-                                                  widget.partialReport
-                                                              .getNumber() !=
-                                                          null
-                                                      ? l10n.reportNumbered(
-                                                          widget.partialReport
-                                                              .getNumber()!)
-                                                      : l10n.reportUnnumbered,
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: theme.colorScheme
-                                                          .onSurfaceVariant),
-                                                )
-                                              ],
-                                            ),
-                                            Container(
-                                                width: 64,
-                                                height: 64,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0),
-                                                    color: theme.colorScheme
-                                                        .intensity(widget
-                                                            .partialReport
-                                                            .intensity)),
-                                                child: Center(
-                                                    child: Text(
-                                                        widget.partialReport
-                                                            .intensity
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 28,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: theme.colorScheme
-                                                                .onIntensity(widget.partialReport.intensity)))))
-                                          ]),
-                                      const SizedBox(height: 16),
-                                      DetailField(
-                                          label: l10n.reportEventTime,
-                                          icon: Icon(Symbols.schedule_rounded,
-                                              size: 32,
-                                              color: theme.colorScheme
-                                                  .onSurfaceVariant),
-                                          value: Text(
-                                              DateFormat("yyyy/MM/dd HH:mm:ss")
-                                                  .format(DateTime
-                                                      .fromMillisecondsSinceEpoch(
-                                                          widget.partialReport
-                                                              .time)),
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: theme.colorScheme
-                                                      .onSurfaceVariant))),
-                                      const SizedBox(height: 12),
-                                      Row(children: [
-                                        Expanded(
-                                            flex: 1,
-                                            child: DetailField(
-                                                label: l10n.reportMagnitude,
-                                                icon: Icon(
-                                                    Symbols.speed_rounded,
-                                                    size: 32,
-                                                    color: theme.colorScheme
-                                                        .onSurfaceVariant),
-                                                value: Text(
-                                                    "M ${widget.partialReport.mag.toStringAsFixed(1)}",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        color: theme.colorScheme
-                                                            .onSurfaceVariant)))),
-                                        Expanded(
-                                            flex: 1,
-                                            child: DetailField(
-                                                label: l10n.reportDepth,
-                                                icon: Icon(
-                                                    Symbols
-                                                        .keyboard_double_arrow_down_rounded,
-                                                    size: 32,
-                                                    color: theme.colorScheme
-                                                        .onSurfaceVariant),
-                                                value: Text(
-                                                    "${widget.partialReport.depth} km",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        color: theme.colorScheme
-                                                            .onSurfaceVariant))))
-                                      ]),
-                                      const SizedBox(height: 12),
-                                      DetailField(
-                                          label: l10n.reportEpicenterCoordinate,
-                                          icon: Icon(Symbols.point_scan_rounded,
-                                              size: 32,
-                                              color: theme.colorScheme
-                                                  .onSurfaceVariant),
-                                          value: Wrap(
-                                            spacing: 16,
-                                            children: [
-                                              Text(
-                                                  toCoordinateNotation(
-                                                      widget.partialReport.lat),
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: theme.colorScheme
-                                                          .onSurfaceVariant)),
-                                              Text(
-                                                  toCoordinateNotation(
-                                                      widget.partialReport.lon),
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: theme.colorScheme
-                                                          .onSurfaceVariant))
-                                            ],
-                                          )),
-                                      const SizedBox(height: 12),
-                                      DetailField(
-                                          label: l10n.reportEpicenterLocation,
-                                          icon: Icon(Symbols.pin_drop_rounded,
-                                              size: 32,
-                                              color: theme.colorScheme
-                                                  .onSurfaceVariant),
-                                          value: Text(
-                                            widget.partialReport.loc
-                                                .replaceFirst("公里", "公里\n"),
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: theme.colorScheme
-                                                    .onSurfaceVariant),
-                                          )),
-                                      const SizedBox(height: 12),
-                                      FutureBuilder(
-                                        future: _report.future,
-                                        builder: (context, snapshot) {
-                                          if (snapshot.hasData) {
-                                            List<Widget> list = [];
-
-                                            snapshot.data!.list
-                                                .forEach((cityName, city) {
-                                              List<Widget> c = [];
-
-                                              city.town
-                                                  .forEach((townName, town) {
-                                                c.add(IntensityBadge(
-                                                    name: townName,
-                                                    station: town));
-                                              });
-
-                                              list.add(Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
-                                                children: [
-                                                  Text(
-                                                    cityName,
-                                                    style: TextStyle(
-                                                        color: theme.colorScheme
-                                                            .outline),
-                                                  ),
-                                                  const SizedBox(height: 8),
-                                                  Wrap(
-                                                      spacing: 6,
-                                                      runSpacing: 6,
-                                                      children: c)
-                                                ],
-                                              ));
-
-                                              list.add(
-                                                  const SizedBox(height: 12));
-                                            });
-
-                                            return DetailField(
-                                                label: l10n.reportIntensity,
-                                                value: Column(children: list));
-                                          } else {
-                                            return const Center(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            );
-                                          }
-                                        },
+                                      Text(
+                                        cityName,
+                                        style: TextStyle(
+                                            color: theme.colorScheme.outline),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Wrap(
+                                        spacing: 6,
+                                        runSpacing: 6,
+                                        children: c,
                                       )
-                                    ]))
-                          ])),
-                    ))
-          ],
-        ));
+                                    ],
+                                  ));
+
+                                  list.add(const SizedBox(height: 12));
+                                });
+
+                                return DetailField(
+                                    label: l10n.reportIntensity,
+                                    value: Column(children: list));
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
