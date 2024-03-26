@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:pocket_quake/core/api.dart';
 import 'package:pocket_quake/model/location.dart';
+import 'package:pocket_quake/model/partial_earthquake_report.dart';
 import 'package:pocket_quake/model/town.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,7 @@ class Global {
   static late String taiwanGeojsonString;
   static Map<String, Map<String, Town>> region = {};
   static Map<String, Location> location = {};
+  static List<PartialEarthquakeReport> reports = [];
   static Future init() async {
     preference = await SharedPreferences.getInstance();
 

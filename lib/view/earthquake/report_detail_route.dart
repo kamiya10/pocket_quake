@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
@@ -13,6 +12,7 @@ import 'package:pocket_quake/globals.dart';
 import 'package:pocket_quake/model/earthquake_report.dart';
 import 'package:pocket_quake/model/partial_earthquake_report.dart';
 import 'package:pocket_quake/utils/dms.dart';
+import 'package:pocket_quake/utils/extensions.dart';
 import 'package:pocket_quake/utils/intensity_color.dart';
 
 class ReportDetailRoute extends StatefulWidget {
@@ -50,32 +50,42 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
 
         all.sort((a, b) => a.intensity - b.intensity);
 
-        final theme = Theme.of(context);
         final points = <LatLng>[LatLng(r.lat, r.lon)];
 
         for (var town in all) {
           points.add(LatLng(town.lat, town.lon));
-          _stations.add(Marker(
+          _stations.add(
+            Marker(
               width: 20,
               height: 20,
               point: LatLng(town.lat, town.lon),
               child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                      color: theme.colorScheme.intensity(town.intensity),
-                      border: Border.all(color: Colors.white)),
-                  child: Center(
-                      child: Text(town.intensity.toString(),
-                          style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold,
-                              color: theme.colorScheme
-                                  .onIntensity(town.intensity)))))));
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: context.colors.intensity(town.intensity),
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Center(
+                  child: Text(
+                    town.intensity.toString(),
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                      color: context.colors.onIntensity(town.intensity),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
         }
 
-        _mapController.fitCamera(CameraFit.bounds(
+        _mapController.fitCamera(
+          CameraFit.bounds(
             bounds: LatLngBounds.fromPoints(points),
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 240)));
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 240),
+          ),
+        );
       });
     });
   }
@@ -108,11 +118,9 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context)!;
     final geojson = GeoJsonParser(
-        defaultPolygonFillColor: theme.colorScheme.surfaceVariant,
-        defaultPolygonBorderColor: theme.colorScheme.outline);
+        defaultPolygonFillColor: context.colors.surfaceVariant,
+        defaultPolygonBorderColor: context.colors.outline);
 
     final baseMap = Global.preference.getString("base_map") ?? "geojson";
 
@@ -121,8 +129,10 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
     }
 
     return Scaffold(
-      appBar:
-          AppBar(leading: const BackButton(), title: Text(l10n.viewReports)),
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: Text(context.l10n.viewReports),
+      ),
       body: Stack(
         children: [
           FlutterMap(
@@ -206,7 +216,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                           width: 32,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: theme.colorScheme.onSurfaceVariant
+                              color: context.colors.onSurfaceVariant
                                   .withOpacity(0.4)),
                         ),
                       ],
@@ -228,17 +238,16 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                     style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
-                                        color: theme.colorScheme.onSurface),
+                                        color: context.colors.onSurface),
                                   ),
                                   Text(
                                     widget.partialReport.getNumber() != null
-                                        ? l10n.reportNumbered(
+                                        ? context.l10n.reportNumbered(
                                             widget.partialReport.getNumber()!)
-                                        : l10n.reportUnnumbered,
+                                        : context.l10n.reportUnnumbered,
                                     style: TextStyle(
                                         fontSize: 16,
-                                        color:
-                                            theme.colorScheme.onSurfaceVariant),
+                                        color: context.colors.onSurfaceVariant),
                                   )
                                 ],
                               ),
@@ -247,7 +256,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                 height: 64,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.0),
-                                  color: theme.colorScheme.intensity(
+                                  color: context.colors.intensity(
                                       widget.partialReport.intensity),
                                 ),
                                 child: Center(
@@ -256,9 +265,8 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                     style: TextStyle(
                                       fontSize: 28,
                                       fontWeight: FontWeight.bold,
-                                      color: theme.colorScheme.onIntensity(
-                                        widget.partialReport.intensity,
-                                      ),
+                                      color: context.colors.onIntensity(
+                                          widget.partialReport.intensity),
                                     ),
                                   ),
                                 ),
@@ -267,7 +275,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                           ),
                           const SizedBox(height: 16),
                           DetailField(
-                            label: l10n.reportEventTime,
+                            label: context.l10n.reportEventTime,
                             icon: Symbols.schedule_rounded,
                             value: Text(
                               DateFormat("yyyy/MM/dd HH:mm:ss").format(
@@ -276,7 +284,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                               ),
                               style: TextStyle(
                                 fontSize: 15,
-                                color: theme.colorScheme.onSurfaceVariant,
+                                color: context.colors.onSurfaceVariant,
                               ),
                             ),
                           ),
@@ -286,13 +294,13 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                               Expanded(
                                 flex: 1,
                                 child: DetailField(
-                                  label: l10n.reportMagnitude,
+                                  label: context.l10n.reportMagnitude,
                                   icon: Symbols.speed_rounded,
                                   value: Text(
                                     "M ${widget.partialReport.mag.toStringAsFixed(1)}",
                                     style: TextStyle(
                                       fontSize: 15,
-                                      color: theme.colorScheme.onSurfaceVariant,
+                                      color: context.colors.onSurfaceVariant,
                                     ),
                                   ),
                                 ),
@@ -300,14 +308,14 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                               Expanded(
                                 flex: 1,
                                 child: DetailField(
-                                  label: l10n.reportDepth,
+                                  label: context.l10n.reportDepth,
                                   icon: Symbols
                                       .keyboard_double_arrow_down_rounded,
                                   value: Text(
                                     "${widget.partialReport.depth} km",
                                     style: TextStyle(
                                       fontSize: 15,
-                                      color: theme.colorScheme.onSurfaceVariant,
+                                      color: context.colors.onSurfaceVariant,
                                     ),
                                   ),
                                 ),
@@ -316,7 +324,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                           ),
                           const SizedBox(height: 12),
                           DetailField(
-                            label: l10n.reportEpicenterCoordinate,
+                            label: context.l10n.reportEpicenterCoordinate,
                             icon: Symbols.point_scan_rounded,
                             value: Wrap(
                               spacing: 16,
@@ -326,7 +334,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                       widget.partialReport.lat),
                                   style: TextStyle(
                                     fontSize: 15,
-                                    color: theme.colorScheme.onSurfaceVariant,
+                                    color: context.colors.onSurfaceVariant,
                                   ),
                                 ),
                                 Text(
@@ -334,7 +342,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                       widget.partialReport.lon),
                                   style: TextStyle(
                                     fontSize: 15,
-                                    color: theme.colorScheme.onSurfaceVariant,
+                                    color: context.colors.onSurfaceVariant,
                                   ),
                                 )
                               ],
@@ -342,15 +350,17 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                           ),
                           const SizedBox(height: 12),
                           DetailField(
-                              label: l10n.reportEpicenterLocation,
-                              icon: Symbols.pin_drop_rounded,
-                              value: Text(
-                                widget.partialReport.loc
-                                    .replaceFirst("公里", "公里\n"),
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: theme.colorScheme.onSurfaceVariant),
-                              )),
+                            label: context.l10n.reportEpicenterLocation,
+                            icon: Symbols.pin_drop_rounded,
+                            value: Text(
+                              widget.partialReport.loc
+                                  .replaceFirst("公里", "公里\n"),
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: context.colors.onSurfaceVariant,
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 12),
                           FutureBuilder(
                             future: _report.future,
@@ -363,7 +373,9 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
 
                                   city.town.forEach((townName, town) {
                                     c.add(IntensityBadge(
-                                        name: townName, station: town));
+                                      name: townName,
+                                      station: town,
+                                    ));
                                   });
 
                                   list.add(Column(
@@ -373,7 +385,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                       Text(
                                         cityName,
                                         style: TextStyle(
-                                            color: theme.colorScheme.outline),
+                                            color: context.colors.outline),
                                       ),
                                       const SizedBox(height: 8),
                                       Wrap(
@@ -388,7 +400,7 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                 });
 
                                 return DetailField(
-                                    label: l10n.reportIntensity,
+                                    label: context.l10n.reportIntensity,
                                     value: Column(children: list));
                               } else {
                                 return const Center(

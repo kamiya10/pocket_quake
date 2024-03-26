@@ -5,4 +5,5 @@ extension BuildContextExtensions on BuildContext {
   AppLocalizations get l10n => AppLocalizations.of(this)!;
   ThemeData get theme => Theme.of(this);
   ColorScheme get colors => theme.colorScheme;
+  ScaffoldMessengerState get scaffold => ScaffoldMessenger.of(this);
 }

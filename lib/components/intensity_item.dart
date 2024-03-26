@@ -1,6 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_quake/model/station_intensity.dart';
+import 'package:pocket_quake/utils/extensions.dart';
 import 'package:pocket_quake/utils/intensity_color.dart';
 
 class IntensityBadge extends StatelessWidget {
@@ -11,17 +12,15 @@ class IntensityBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14.0),
         border: Border.all(
-          color: theme.colorScheme.intensity(station.intensity),
+          color: context.colors.intensity(station.intensity),
         ),
-        color: theme.colorScheme
+        color: context.colors
             .intensity(station.intensity)
-            .harmonizeWith(theme.colorScheme.primary)
+            .harmonizeWith(context.colors.primary)
             .withOpacity(0.16),
       ),
       child: Row(
@@ -33,7 +32,7 @@ class IntensityBadge extends StatelessWidget {
             height: 28,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: theme.colorScheme.intensity(station.intensity),
+              color: context.colors.intensity(station.intensity),
             ),
             child: Center(
               child: Text(
@@ -41,7 +40,7 @@ class IntensityBadge extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onIntensity(station.intensity),
+                  color: context.colors.onIntensity(station.intensity),
                 ),
               ),
             ),
@@ -51,7 +50,7 @@ class IntensityBadge extends StatelessWidget {
             child: Text(
               name,
               style: TextStyle(
-                color: theme.colorScheme.onSurfaceVariant,
+                color: context.colors.onSurfaceVariant,
                 fontSize: 14,
               ),
             ),

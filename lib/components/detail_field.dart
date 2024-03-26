@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_quake/utils/extensions.dart';
 
 class DetailField extends StatelessWidget {
   final String label;
@@ -9,8 +10,6 @@ class DetailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     final detail = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -18,7 +17,7 @@ class DetailField extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 14,
-            color: theme.colorScheme.onSurface,
+            color: context.colors.onSurface,
           ),
         ),
         const SizedBox(height: 4),
@@ -32,7 +31,7 @@ class DetailField extends StatelessWidget {
           Icon(
             icon,
             size: 32,
-            color: theme.colorScheme.onSurfaceVariant,
+            color: context.colors.onSurfaceVariant,
           ),
           const SizedBox(width: 12),
           detail

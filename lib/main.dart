@@ -47,20 +47,22 @@ class MainAppState extends State<MainApp> {
   }
 
   @override
-  Widget build(BuildContext context) => DynamicColorBuilder(
-        builder: (lightColorScheme, darkColorScheme) => MaterialApp(
-          theme: ThemeData(
-            colorScheme: lightColorScheme,
-            brightness: Brightness.light,
-          ),
-          darkTheme: ThemeData(
-            colorScheme: darkColorScheme,
-            brightness: Brightness.dark,
-          ),
-          themeMode: _themeMode,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: const Layout(),
+  Widget build(BuildContext context) {
+    return DynamicColorBuilder(
+      builder: (lightColorScheme, darkColorScheme) => MaterialApp(
+        theme: ThemeData(
+          colorScheme: lightColorScheme,
+          brightness: Brightness.light,
         ),
-      );
+        darkTheme: ThemeData(
+          colorScheme: darkColorScheme,
+          brightness: Brightness.dark,
+        ),
+        themeMode: _themeMode,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const Layout(),
+      ),
+    );
+  }
 }

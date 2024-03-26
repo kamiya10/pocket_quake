@@ -1,6 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:pocket_quake/model/partial_earthquake_report.dart';
 import 'package:pocket_quake/utils/extensions.dart';
@@ -14,9 +13,6 @@ class EarthquakeReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context)!;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Column(
@@ -26,11 +22,11 @@ class EarthquakeReportCard extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8),
             child: Text(
               report.getNumber() != null
-                  ? l10n.reportNumbered(report.getNumber()!)
-                  : l10n.reportUnnumbered,
+                  ? context.l10n.reportNumbered(report.getNumber()!)
+                  : context.l10n.reportUnnumbered,
               style: TextStyle(
                 fontSize: 14,
-                color: theme.colorScheme.outline,
+                color: context.colors.outline,
               ),
             ),
           ),
@@ -61,7 +57,7 @@ class EarthquakeReportCard extends StatelessWidget {
                       left: BorderSide(
                         color: report
                             .getReportColor()
-                            .harmonizeWith(theme.colorScheme.primary),
+                            .harmonizeWith(context.colors.primary),
                         width: 4,
                       ),
                     ),
@@ -87,24 +83,25 @@ class EarthquakeReportCard extends StatelessWidget {
                             ),
                             style: TextStyle(
                               fontSize: 14,
-                              color: theme.colorScheme.onSurfaceVariant,
+                              color: context.colors.onSurfaceVariant,
                             ),
                           ),
                           Row(
                             children: [
                               Text(
-                                l10n.reportCardMagnitude(
+                                context.l10n.reportCardMagnitude(
                                     report.mag.toStringAsFixed(1)),
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: theme.colorScheme.onSurfaceVariant),
+                                    color: context.colors.onSurfaceVariant),
                               ),
                               const SizedBox(width: 8),
                               Text(
-                                l10n.reportCardDepth(report.depth.toString()),
+                                context.l10n
+                                    .reportCardDepth(report.depth.toString()),
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: theme.colorScheme.onSurfaceVariant),
+                                    color: context.colors.onSurfaceVariant),
                               ),
                             ],
                           )
@@ -115,7 +112,7 @@ class EarthquakeReportCard extends StatelessWidget {
                         height: 64,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.0),
-                          color: theme.colorScheme.intensity(report.intensity),
+                          color: context.colors.intensity(report.intensity),
                         ),
                         child: Center(
                           child: Text(
@@ -123,8 +120,8 @@ class EarthquakeReportCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: theme.colorScheme
-                                  .onIntensity(report.intensity),
+                              color:
+                                  context.colors.onIntensity(report.intensity),
                             ),
                           ),
                         ),

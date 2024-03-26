@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
@@ -20,10 +19,9 @@ class _EewRoute extends State<EewRoute> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final geojson = GeoJsonParser(
-        defaultPolygonFillColor: theme.colorScheme.surfaceVariant,
-        defaultPolygonBorderColor: theme.colorScheme.outline);
+        defaultPolygonFillColor: context.colors.surfaceVariant,
+        defaultPolygonBorderColor: context.colors.outline);
 
     final baseMap = Global.preference.getString("base_map") ?? "geojson";
 
@@ -84,7 +82,7 @@ class _EewRoute extends State<EewRoute> {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
               ),
-              color: theme.colorScheme.error,
+              color: context.colors.error,
               margin: EdgeInsets.zero,
               child: Padding(
                 padding: const EdgeInsets.all(32),
@@ -94,7 +92,7 @@ class _EewRoute extends State<EewRoute> {
                     Icon(
                       Symbols.crisis_alert_rounded,
                       size: 32,
-                      color: theme.colorScheme.onError,
+                      color: context.colors.onError,
                       fill: 1,
                       weight: 700,
                     ),
@@ -102,7 +100,7 @@ class _EewRoute extends State<EewRoute> {
                     Text(
                       "強震即時警報",
                       style: TextStyle(
-                          color: theme.colorScheme.onError,
+                          color: context.colors.onError,
                           fontSize: 24,
                           fontWeight: FontWeight.bold),
                     ),
@@ -111,7 +109,7 @@ class _EewRoute extends State<EewRoute> {
                       "花蓮縣秀林鄉發生地震\n慎防強烈搖晃",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: theme.colorScheme.onError,
+                        color: context.colors.onError,
                         fontSize: 14,
                       ),
                     )

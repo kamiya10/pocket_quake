@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:pocket_quake/utils/extensions.dart';
 import 'package:pocket_quake/view/home.dart';
 import 'package:pocket_quake/view/reports.dart';
 import 'package:pocket_quake/view/settings.dart';
@@ -32,37 +32,39 @@ class LayoutState extends State<Layout> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-              _pageController.jumpToPage(currentPageIndex);
-            });
-          },
-          selectedIndex: currentPageIndex,
-          destinations: <Widget>[
-            NavigationDestination(
-              icon: const Icon(Symbols.home_rounded),
-              selectedIcon: const Icon(Symbols.home_rounded, fill: 1.0),
-              label: AppLocalizations.of(context)!.viewDashboard,
-            ),
-            NavigationDestination(
-              icon: const Icon(Symbols.earthquake_rounded),
-              selectedIcon: const Icon(Symbols.earthquake_rounded, fill: 1.0),
-              label: AppLocalizations.of(context)!.viewReports,
-            ),
-            NavigationDestination(
-              icon: const Icon(Symbols.settings_rounded),
-              selectedIcon: const Icon(Symbols.settings_rounded, fill: 1.0),
-              label: AppLocalizations.of(context)!.viewSettings,
-            )
-          ],
-        ),
-        body: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: bodyWidgets,
-        ),
-      );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+            _pageController.jumpToPage(currentPageIndex);
+          });
+        },
+        selectedIndex: currentPageIndex,
+        destinations: <Widget>[
+          NavigationDestination(
+            icon: const Icon(Symbols.home_rounded),
+            selectedIcon: const Icon(Symbols.home_rounded, fill: 1.0),
+            label: context.l10n.viewDashboard,
+          ),
+          NavigationDestination(
+            icon: const Icon(Symbols.earthquake_rounded),
+            selectedIcon: const Icon(Symbols.earthquake_rounded, fill: 1.0),
+            label: context.l10n.viewReports,
+          ),
+          NavigationDestination(
+            icon: const Icon(Symbols.settings_rounded),
+            selectedIcon: const Icon(Symbols.settings_rounded, fill: 1.0),
+            label: context.l10n.viewSettings,
+          )
+        ],
+      ),
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: bodyWidgets,
+      ),
+    );
+  }
 }
