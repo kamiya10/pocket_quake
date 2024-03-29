@@ -42,20 +42,32 @@ class LayoutState extends State<Layout> {
           });
         },
         selectedIndex: currentPageIndex,
-        destinations: <Widget>[
+        destinations: <NavigationDestination>[
           NavigationDestination(
             icon: const Icon(Symbols.home_rounded),
-            selectedIcon: const Icon(Symbols.home_rounded, fill: 1.0),
+            selectedIcon: const Icon(
+              Symbols.home_rounded,
+              fill: 1.0,
+              weight: 600,
+            ),
             label: context.l10n.viewDashboard,
           ),
           NavigationDestination(
             icon: const Icon(Symbols.earthquake_rounded),
-            selectedIcon: const Icon(Symbols.earthquake_rounded, fill: 1.0),
+            selectedIcon: const Icon(
+              Symbols.earthquake_rounded,
+              fill: 1.0,
+              weight: 600,
+            ),
             label: context.l10n.viewReports,
           ),
           NavigationDestination(
             icon: const Icon(Symbols.settings_rounded),
-            selectedIcon: const Icon(Symbols.settings_rounded, fill: 1.0),
+            selectedIcon: const Icon(
+              Symbols.settings_rounded,
+              fill: 1.0,
+              weight: 600,
+            ),
             label: context.l10n.viewSettings,
           )
         ],

@@ -31,6 +31,13 @@ class EarthquakeReport {
 
   Map<String, dynamic> toJson() => _$EarthquakeReportToJson(this);
 
+  Uri get cwaUrl {
+    final arr = id.split("-");
+    arr.removeAt(1);
+    return Uri.parse(
+        "https://www.cwa.gov.tw/V8/C/E/EQ/EQ${arr.join('-')}.html");
+  }
+
   String? getNumber() {
     final n = id.split("-").first;
 

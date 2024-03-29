@@ -30,7 +30,7 @@ class DetailField extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 32,
+            size: 28,
             color: context.colors.onSurfaceVariant,
           ),
           const SizedBox(width: 12),

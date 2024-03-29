@@ -14,6 +14,7 @@ import 'package:pocket_quake/model/partial_earthquake_report.dart';
 import 'package:pocket_quake/utils/dms.dart';
 import 'package:pocket_quake/utils/extensions.dart';
 import 'package:pocket_quake/utils/intensity_color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReportDetailRoute extends StatefulWidget {
   final PartialEarthquakeReport partialReport;
@@ -270,6 +271,28 @@ class _ReportDetailRouteState extends State<ReportDetailRoute> {
                                     ),
                                   ),
                                 ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Wrap(
+                            children: [
+                              ActionChip(
+                                avatar: Icon(
+                                  Symbols.open_in_browser_rounded,
+                                  size: 22,
+                                  color: context.colors.onSurfaceVariant,
+                                ),
+                                label: Text(
+                                  context.l10n.reportChipOpenReport,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                elevation: 4,
+                                onPressed: () {
+                                  launchUrl(widget.partialReport.cwaUrl);
+                                },
                               ),
                             ],
                           ),

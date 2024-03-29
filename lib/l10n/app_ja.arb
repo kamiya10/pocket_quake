@@ -28,5 +28,6 @@
   "reportEpicenterCoordinate": "震源座標",
   "reportEpicenterLocation": "震源地",
   "reportIntensity": "各地の最大震度",
+  "reportChipOpenReport": "ウェブ",
   "about": "Pocket Quake is an experimental app that annoys you when an earthquake is incoming.\n\nAll earthquake data is from ExpTech and can be very unstable when high traffic.\n\nThis app is made for people lived in Taiwan, so there will be no earthquake support outside of Taiwan."
 }

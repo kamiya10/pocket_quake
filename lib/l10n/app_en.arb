@@ -127,6 +127,10 @@
   "@reportIntensity": {
     "description": "Maximum Intensity of an earthquake report"
   },
+  "reportChipOpenReport": "Earthquake Report",
+  "@reportChipOpenReport": {
+    "description": "Open Earthquake Report Chip label"
+  },
   "about": "Pocket Quake is an experimental app that annoys you when an earthquake is incoming.\n\nAll earthquake data is from ExpTech and can be very unstable when high traffic.\n\nThis app is made for people lived in Taiwan, so there will be no earthquake support outside of Taiwan.",
   "@about": {
     "description": "About page content"

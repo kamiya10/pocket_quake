@@ -51,6 +51,7 @@ class IntensityBadge extends StatelessWidget {
               name,
               style: TextStyle(
                 color: context.colors.onSurfaceVariant,
+                height: 1,
                 fontSize: 14,
               ),
             ),
