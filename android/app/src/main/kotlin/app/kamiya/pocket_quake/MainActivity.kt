@@ -1,4 +1,4 @@
-package com.example.pocket_quake
+package app.kamiya.pocket_quake
 
 import io.flutter.embedding.android.FlutterActivity
 

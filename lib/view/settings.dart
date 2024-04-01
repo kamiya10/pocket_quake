@@ -1,5 +1,9 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:optimize_battery/optimize_battery.dart';
 import 'package:pocket_quake/globals.dart';
 import 'package:pocket_quake/main.dart';
 import 'package:pocket_quake/utils/extensions.dart';
@@ -17,6 +21,23 @@ class _SettingsState extends State<Settings> {
   String _theme = Global.preference.getString("theme") ?? "system";
   String _mapBase = Global.preference.getString("base_map") ?? "geojson";
   String _location = Global.preference.getString("location") ?? "";
+  bool showBatteryOptimizationAlert = false;
+
+  void checkBatteryOptimization() {
+    OptimizeBattery.isIgnoringBatteryOptimizations().then((isOptimized) {
+      if (!isOptimized) {
+        setState(() {
+          showBatteryOptimizationAlert = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkBatteryOptimization();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,47 +61,48 @@ class _SettingsState extends State<Settings> {
       ),
       body: ListView(
         children: [
-          ListTile(
-            leading: const Icon(Symbols.dark_mode_rounded),
-            title: Text(context.l10n.settingsThemeTitle),
-            subtitle: Text(themeOptions[_theme]!),
-            onTap: () => showDialog<String>(
-              context: context,
-              builder: (BuildContext context) => SimpleDialog(
-                title: Text(context.l10n.settingsThemeTitle),
-                children: [
-                  ...themeOptions.entries.map(
-                    (e) => RadioListTile(
-                      value: e.key,
-                      groupValue: _theme,
-                      title: Text(e.value),
-                      onChanged: (value) {
-                        if (value != null) {
-                          setState(() {
-                            _theme = value;
-                            Global.preference.setString("theme", value);
-                            MainApp.of(context)!.changeTheme(_theme);
-                            Navigator.pop(context);
-                          });
-                        }
-                      },
+          if (showBatteryOptimizationAlert)
+            ListTile(
+              leading: const Icon(Symbols.dark_mode_rounded),
+              title: Text(context.l10n.settingsThemeTitle),
+              subtitle: Text(themeOptions[_theme]!),
+              onTap: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => SimpleDialog(
+                  title: Text(context.l10n.settingsThemeTitle),
+                  children: [
+                    ...themeOptions.entries.map(
+                      (e) => RadioListTile(
+                        value: e.key,
+                        groupValue: _theme,
+                        title: Text(e.value),
+                        onChanged: (value) {
+                          if (value != null) {
+                            setState(() {
+                              _theme = value;
+                              Global.preference.setString("theme", value);
+                              MainApp.of(context)!.changeTheme(_theme);
+                              Navigator.pop(context);
+                            });
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(context.l10n.buttonCancel))
-                      ],
-                    ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text(context.l10n.buttonCancel))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
           ListTile(
             leading: const Icon(Symbols.location_pin_rounded),
             title: Text(context.l10n.settingsLocationTitle),
@@ -151,6 +173,16 @@ class _SettingsState extends State<Settings> {
                 context,
                 MaterialPageRoute(builder: (context) => const EewRoute()),
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Symbols.bug_report_rounded),
+            title: const Text("複製 FCM Token"),
+            onTap: () async {
+              Clipboard.setData(ClipboardData(
+                  text: await FirebaseMessaging.instance.getToken() ?? ""));
+              const snackBar = SnackBar(content: Text('已複製 FCM Token'));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
           ),
           AboutListTile(

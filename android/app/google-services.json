@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "669959883293",
+    "project_id": "pocket-quake-tw",
+    "storage_bucket": "pocket-quake-tw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669959883293:android:a9c38e4ed6b74ece1ed4f4",
+        "android_client_info": {
+          "package_name": "app.kamiya.pocket_quake"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1vwQD7EoXXO_DZrwc0cyb8R8zPmxnyh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
