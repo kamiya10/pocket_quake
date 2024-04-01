@@ -94,8 +94,9 @@ class _SettingsState extends State<Settings> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Text(context.l10n.buttonCancel))
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(context.l10n.buttonCancel),
+                          )
                         ],
                       ),
                     )
